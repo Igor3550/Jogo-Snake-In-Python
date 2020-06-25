@@ -7,8 +7,6 @@ import sys  # biblioteca do systema
 
 
 # definindo os objetos
-
-
 class Apple:  # atribuições e funções do objeto 'Apple'
     def __init__(self):
         self.body = pygame.Surface((10, 10))
