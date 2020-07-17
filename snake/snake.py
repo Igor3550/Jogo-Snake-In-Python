@@ -5,9 +5,17 @@ from time import sleep  # lib para dar um tempo na execução
 import pygame  # biblioteca para janela e objetos e tudo mais
 import sys  # biblioteca do systema
 
+atual_state = 0
+snake = object
+apple = object
 
-# definindo os objetos
-def init():
+
+def init(cor=(255, 255, 255)):
+    global atual_state
+    global snake
+    global apple
+
+    # definindo os objetos
     class Apple:  # atribuições e funções do objeto 'Apple'
         def __init__(self):
             self.body = pygame.Surface((10, 10))
@@ -28,7 +36,7 @@ def init():
     class Snake:  # atribuições e funções do objeto 'Snake'
         def __init__(self):
             self.body = pygame.Surface((10, 10))
-            self.body.fill((255, 255, 255))
+            self.body.fill(cor)
             self.pos = [(300, 300), (310, 300), (320, 300)]
             self.direct = 1
 
@@ -99,9 +107,8 @@ def init():
         screen.blit(score_surface, (350, 350))
 
     def espera(pon=0, pontuacao=False, perd=False):  # desenha a 'Snake' se movimentando só
-
+        global atual_state
         if perd:  # se tiver pedido da um tempo antes de mudar de tela
-            global atual_state
             atual_state = verify(atual_state)
 
         if pontuacao:  # mostrar ou não a pontuação e o recorde
@@ -272,9 +279,9 @@ def init():
 
             if ponts > record:  # se 'ponts' for maior que 'record' então ele recebe o valor de 'ponts'
                 record = ponts
-                pontos = 0
 
             perdeu(ponts)
+            pontos = 0
 
         # estado jogando
         elif atual_state == states['JOGANDO']:
